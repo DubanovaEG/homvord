@@ -1,29 +1,43 @@
 from typing import List, Dict, Any
 
 
-def filter_by_state(operations: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
+def filter_by_state(
+        operations: List[Dict[str, Any]],
+        state: str = 'EXECUTED'
+) -> List[Dict[str, Any]]:
     """
-    Фильтрует список операций по статусу.
+    Фильтрует операции по статусу.
 
     Args:
-        operations: Список словарей с данными о банковских операциях
-        state: Статус операций для фильтрации (по умолчанию 'EXECUTED')
+        operations: Список операций
+        state: Статус для фильтрации
 
     Returns:
-        Новый список словарей, содержащий только операции с указанным статусом
+        Отфильтрованный список операций
     """
-    return [operation for operation in operations if operation.get('state') == state]
+    filtered_ops = []
+    for operation in operations:
+        if operation.get('state') == state:
+            filtered_ops.append(operation)
+    return filtered_ops
 
 
-def sort_by_date(operations: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
+def sort_by_date(
+        operations: List[Dict[str, Any]],
+        reverse: bool = True
+) -> List[Dict[str, Any]]:
     """
-    Сортирует список операций по дате.
+    Сортирует операции по дате.
 
     Args:
-        operations: Список словарей с данными о банковских операциях
-        reverse: Порядок сортировки (True - по убыванию, False - по возрастанию)
+        operations: Список операций
+        reverse: Порядок сортировки
 
     Returns:
-        Новый список словарей, отсортированный по дате
+        Отсортированный список операций
     """
-    return sorted(operations, key=lambda x: x['date'], reverse= reverse)
+    return sorted(
+        operations,
+        key=lambda x: x['date'],
+        reverse=reverse
+    )
